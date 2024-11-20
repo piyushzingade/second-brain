@@ -1,13 +1,11 @@
+import { Request , Response , Router } from "express";
+import { z } from "zod";
+import { User } from "../models/model";
+import bcrypt from "bcryptjs";
 
-import express from 'express';
-import { z } from 'zod';
-import { User } from '../models/model';
-import bcrypt from 'bcryptjs';
+export const router = Router();
 
-export const router = express.Router();
-
-router.post('/signup', async (req, res) => {
-
+router.post("/signup", async (req : Request, res : Response) => {
   try {
     const schemaValidation = z.object({
       name: z.string().min(3).max(50),
@@ -30,18 +28,15 @@ router.post('/signup', async (req, res) => {
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password :hashedPassword });
-  
+    const user = await User.create({ name, email, password: hashedPassword });
+
     res.status(201).json({
       success: true,
-      message: "User created successfully" ,
+      message: "User created successfully",
       user,
     });
-  } catch (error :any) {
+  } catch (error: any) {
     res.status(411).json({ message: error });
     console.log("Error in signup", error.message);
   }
-
-
 });
-
