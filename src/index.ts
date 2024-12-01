@@ -8,8 +8,13 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with the frontend's origin
+    credentials: true, // Allow cookies and headers like `Authorization`
+  })
+);
 app.post("/api/v1/signup", async (req, res) => {
   // TODO: zod validation , hash the password
   const username = req.body.username;
