@@ -1,1 +1,1 @@
-{"root":["./src/config.ts","./src/db.ts","./src/index.ts","./src/middleware.ts","./src/override.d.ts","./src/utils.ts"],"version":"5.6.3"}
+{"root":["./src/config.ts","./src/index.ts","./src/middleware.ts","./src/override.d.ts","./src/utils.ts","./src/db/db.ts","./src/models/model.ts","./src/routes/user.route.ts"],"version":"5.6.3"}
