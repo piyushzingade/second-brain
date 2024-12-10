@@ -5,7 +5,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel } from "../models/model";
 
 
-const USER_JWT_SECRET = process.env.USER_JWT_SECRET || "JsonewbtokenSECRET";
+const USER_JWT_SECRET = process.env.USER_JWT_SECRET || "secret";
 
 interface CustomRequest extends Request {
   user?: any; // Replace `any` with your User type

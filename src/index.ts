@@ -25,7 +25,7 @@ app.use("/api/v1/content", contentRouter);
 app.use("/api/v1/tag", tagRouter);
 app.use("/api/v1/brain", brainRouter);
 
-app.listen( 3000 , ()=>{
+app.listen( PORT , ()=>{
   connectDB(),
   console.log("Server Connected")
 } )
