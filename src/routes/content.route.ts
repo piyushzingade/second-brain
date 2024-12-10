@@ -1,8 +1,7 @@
 import { Router, Request, Response } from "express";
 import mongoose from "mongoose";
 import { ContentModel } from "../models/model";
-import { userMiddleware } from "../middleware/middleware";
-export const contentRouter = Router();
+const contentRouter = Router();
 
 contentRouter.get("/test", (req: Request, res: Response) => {
   res.json({
@@ -10,7 +9,7 @@ contentRouter.get("/test", (req: Request, res: Response) => {
   });
 });
 
-contentRouter.post("/create" ,  async (req: Request, res: Response) => {
+contentRouter.post("/create", async (req: Request, res: Response) => {
   try {
     const { link, type, title, description, tags, userId } = req.body;
 
@@ -34,7 +33,9 @@ contentRouter.post("/create" ,  async (req: Request, res: Response) => {
   }
 });
 
-contentRouter.delete("/remove", async (req: Request, res: Response): Promise<void> => {
+contentRouter.delete(
+  "/remove",
+  async (req: Request, res: Response): Promise<void> => {
     try {
       const { contentId, userId } = req.body;
 
@@ -76,3 +77,4 @@ contentRouter.delete("/remove", async (req: Request, res: Response): Promise<voi
   }
 );
 
+export default contentRouter;

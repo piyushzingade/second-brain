@@ -3,7 +3,7 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ContentModel, UserModel } from "../models/model";
-import {userMiddleware} from "../middleware/middleware";
+import  userMiddleware from "../middleware/middleware";
 const USER_JWT_SECRET = process.env.USER_JWT_SECRET ;
 
 export const userRouter = Router();
@@ -38,9 +38,15 @@ userRouter.post("/signup", async (req: Request, res: Response) => {
       });
     }
     const { email, username, password } = req.body;
-
+    const userAlreadyExists = await UserModel.findOne({ username : username})
+    if(userAlreadyExists){
+      res.status(405).json({
+        message : "User already Exists"
+      })
+      return;
+    }
     const hashedPassword = await bcrypt.hash(password, 5);
-    console.log("hashedpassword: ", hashedPassword);
+    // console.log("hashedpassword: ", hashedPassword);
     await UserModel.create({
       email,
       username,

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import {userRouter} from "./routes/user.route";
 import {tagRouter} from "./routes/tag";
 import connectDB from "./db/db";
-import {contentRouter} from "./routes/content.route";
+import contentRouter from "./routes/content.route";
 import {brainRouter} from "./routes/brain.route";
 import cors from "cors";
 dotenv.config();
@@ -25,12 +25,9 @@ app.use("/api/v1/content", contentRouter);
 app.use("/api/v1/tag", tagRouter);
 app.use("/api/v1/brain", brainRouter);
 
-async function main() {
-  await connectDB();
-  app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT} at http://localhost:3000`);
-  });
-}
-main();
+app.listen( 3000 , ()=>{
+  connectDB(),
+  console.log("Server Connected")
+} )
 
 export default app;

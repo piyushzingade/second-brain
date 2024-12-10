@@ -4,19 +4,20 @@ dotenv.config();
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel } from "../models/model";
 
-const USER_JWT_SECRET = process.env.USER_JWT_SECRET; 
+
+const USER_JWT_SECRET = process.env.USER_JWT_SECRET || "JsonewbtokenSECRET";
 
 interface CustomRequest extends Request {
   user?: any; // Replace `any` with your User type
 }
 
-export const  userMiddleware = async(
+async function userMiddleware(
   req: CustomRequest,
   res: Response,
   next: NextFunction
-) =>{
+) {
   try {
-    const token = req.headers.token; // "Bearer <token>"
+    const token = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
     console.log("token", token);
     if (!token) {
       res.status(401).json({
@@ -25,7 +26,7 @@ export const  userMiddleware = async(
       return;
     }
 
-    const decoded = jwt.verify(token as string, USER_JWT_SECRET as string) as JwtPayload;
+    const decoded = jwt.verify(token, USER_JWT_SECRET) as JwtPayload;
     console.log(decoded);
 
     const user = await UserModel.findById(decoded.id);
@@ -47,4 +48,4 @@ export const  userMiddleware = async(
   }
 }
 
-
+export default userMiddleware;

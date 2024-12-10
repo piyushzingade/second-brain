@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-import { userMiddleware } from "../middleware/middleware";
+import  userMiddleware from "../middleware/middleware";
 import { ContentModel, LinkModel } from "../models/model";
 dotenv.config();
 
