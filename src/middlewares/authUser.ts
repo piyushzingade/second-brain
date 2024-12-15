@@ -1,5 +1,5 @@
 
-import jwt,{JwtPayload} from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import { Response } from "express";
 import  {AuthenticatedRequest}  from "../types";
 import { NextFunction } from "express";
@@ -11,7 +11,7 @@ dotenv.config();
 export const  authUser = async (req:AuthenticatedRequest,res:Response,next:NextFunction):Promise<void> =>{
     try{
         const token=req.headers.token;
-        console.log("In middlwware")
+        // console.log("In middlwware")
         if (!token || Array.isArray(token)) {
              res.status(400).json({
               success: false,
@@ -20,15 +20,14 @@ export const  authUser = async (req:AuthenticatedRequest,res:Response,next:NextF
             return 
           }
           const JWT_SECRET=process.env.JWT_SECRET || "secret"
-          if(!JWT_SECRET)return
+          if(!JWT_SECRET) return
           const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
-          console.log(decoded)
+          // console.log(decoded)
 
           if (decoded) {
             req.userId = decoded.id; 
             next()
           }
-
          else{
             res.status(403).json({
                 message: "Invalid Token"

@@ -12,20 +12,20 @@ dotenv.config();
 const reqbody=z.object({
    email:z.string(),
    password:z.string().min(6, { message: "Password must be at least 8 characters long." })
-   // .max(32, { message: "Password must not exceed 32 characters." })
-   // .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter." })
-   // .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter." })
-   // .regex(/[0-9]/, { message: "Password must contain at least one number." })
-   // .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character." })
+   .max(32, { message: "Password must not exceed 32 characters." })
+   .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter." })
+   .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter." })
+   .regex(/[0-9]/, { message: "Password must contain at least one number." })
+   .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character." })
  
 })
    
 
-export const signUp=async(req:Request,res:Response):Promise<void>=>{
+export const signUp = async(req:Request,res:Response):Promise<void>=>{
      try{
       
          const parseData=reqbody.safeParse(req.body)
-         console.log("zod verification ",parseData)
+         // console.log("zod verification ",parseData)
          if(!parseData.success){
           
             res.status(400).json({
@@ -41,7 +41,7 @@ export const signUp=async(req:Request,res:Response):Promise<void>=>{
        
 
          const existingUser=await User.findOne({email});
-         console.log(existingUser)
+         // console.log(existingUser)
          if(existingUser){
            res.status(400).json({
                success:false,
@@ -116,7 +116,7 @@ export const sigin=async(req:Request,res:Response):Promise<void>=>{
          return
       }
     const JWT_SECRET=process.env.JWT_SECRET || "secret"
-    if(!JWT_SECRET)return
+    if(!JWT_SECRET) return
     const token= jwt.sign({id:existingUser._id.toString()},JWT_SECRET);
   
     res.status(200).json({
