@@ -12,7 +12,9 @@ const PORT=3000;
 
 
 app.use(Express.json())
-
+app.get('/' , (req ,res)=>{
+    res.send("Hii there")
+})
 app.get("/api/v1/tag",getAllTag);
 app.get("/api/v1/brain/:shareLink",shareLink)
 app.use("/api/v1",userRoutes);
