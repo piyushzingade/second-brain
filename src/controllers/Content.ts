@@ -1,6 +1,6 @@
 
 import { Response } from "express";
-import { AuthenticatedRequest } from "../types";
+import { AuthenticatedRequest } from "../types/types";
 import { Content } from "../models/Content.model";
 
 export const createContent = async (

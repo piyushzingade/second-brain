@@ -1,4 +1,4 @@
-import { AuthenticatedRequest } from "../types";
+import { AuthenticatedRequest } from "../types/types";
 import { v4 as uuidv4 } from "uuid";
 import { Response } from "express";
 import { Link } from "../models/Link.model";

@@ -1,5 +1,5 @@
 import Tag from "../models/Tag.model";
-import { AuthenticatedRequest } from "../types";
+import { AuthenticatedRequest } from "../types/types";
 import { Response,Request } from "express";
 
 
